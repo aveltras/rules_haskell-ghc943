@@ -9,11 +9,25 @@ load(
 
 haskell_toolchain_library(name="base")
 
-haskell_binary(
-    name = "hello",
-    srcs = ["src/Main.hs"],
+haskell_library(
+    name = "lib",
+    srcs = ["src/Lib.hs"],
     deps = [
         ":base"
+    ],
+    visibility = [
+        "//visibility:public",
+    ],
+)
+
+haskell_binary(
+    name = "hello",
+    srcs = ["bin/CustomMain.hs"],
+    main_function = "main",
+    main_file = "bin/CustomMain.hs",
+    deps = [
+        ":base",
+        ":lib",
     ],
     visibility = [
         "//visibility:public",
@@ -24,6 +38,7 @@ haskell_binary(
 haskell_repl(
     name = "repl",
     deps = [
+        ":lib",
         ":hello"
     ],
 )

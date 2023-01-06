@@ -19,7 +19,7 @@
           inherit self nixpkgs;
           overlay = final: prev: {};
           devShell = pkgs.mkShell {
-            buildInputs = [ pkgs.bazel_4 ];
+            buildInputs = [ pkgs.bazel_4 pkgs.ghcid ];
           };
         });
 }

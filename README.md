@@ -48,3 +48,31 @@ Loaded GHCi configuration from /home/romain/.cache/bazel/_bazel_romain/7f1c35157
 ghci> 
 Leaving GHCi.
 ```
+
+## GHCID
+
+### Without custom name main (works)
+
+```sh
+ghcid -c 'bazel run :repl' -W -T Main.main
+```
+
+generated ghci script:
+
+```
+:add *src/Lib.hs *bin/Main.hs
+:module + Lib Main
+```
+
+### With custom name main (doesn't work)
+
+```sh
+ghcid -c 'bazel run :repl' -W -T CustomMain.main
+```
+
+generated ghci script:
+
+```
+:add *src/Lib.hs *bin/CustomMain.hs
+:module + Lib Main
+```
