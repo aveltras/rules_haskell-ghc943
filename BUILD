@@ -23,8 +23,23 @@ haskell_library(
 haskell_binary(
     name = "hello",
     srcs = ["bin/CustomMain.hs"],
-    main_function = "main",
+    main_function = "CustomMain.main",
     main_file = "bin/CustomMain.hs",
+    deps = [
+        ":base",
+        ":lib",
+    ],
+    visibility = [
+        "//visibility:public",
+    ],
+)
+
+
+haskell_binary(
+    name = "hello2",
+    srcs = ["bin/SecondMain.hs"],
+    main_function = "SecondMain.main",
+    main_file = "bin/SecondMain.hs",
     deps = [
         ":base",
         ":lib",
@@ -39,6 +54,7 @@ haskell_repl(
     name = "repl",
     deps = [
         ":lib",
-        ":hello"
+        ":hello",
+        ":hello2",
     ],
 )
